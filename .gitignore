@@ -19,3 +19,17 @@
 
 # Go workspace file
 go.work
+
+./.idea
+./.idea/*
+!.idea/.gitignore
+!.idea/misc.xml
+!.idea/modules.xml
+!.idea/vcs.xml
+!.idea/dataSources.xml
+!.idea/dataSources.ids
+
+./.vscode
+./.vscode/*
+./prime-go
+./main

@@ -39,11 +39,19 @@ jobs:
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
-      - name: Deploy to Kubernetes cluster
+      - name: deploy to cluster
         uses: kodermax/kubectl-aws-eks@master
         env:
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: exercise-ecr-repo
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: exercise-ecr-repo
           IMAGE_TAG: ${{ github.sha }}
         with:
-          args: set image deployment/my-pod app=$REGISTRY/$REPOSITORY:$IMAGE_TAG --record -n $KUBE_NAMESPACE
+          args: set image deployment/$ECR_REPOSITORY $ECR_REPOSITORY=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: verify deployment
+        uses: kodermax/kubectl-aws-eks@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: rollout status deployment/exercise-ecr-repo

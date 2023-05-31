@@ -2,6 +2,8 @@
 
 [![Build and Push an Image to ECR](https://github.com/josephgoksu/prime-go/actions/workflows/main.yml/badge.svg)](https://github.com/josephgoksu/prime-go/actions/workflows/main.yml)
 
+[![CodeQL](https://github.com/josephgoksu/prime-go/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/josephgoksu/prime-go/actions/workflows/github-code-scanning/codeql)
+
 This is a simple repository to test the Go language. It will be used for platform engineering exercises.
 
 It will be used in [this](https://github.com/josephgoksu/platform-eng-exercise/) repository:
